@@ -1,6 +1,10 @@
-name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+name: learn-github-actions  # name of the workflow
+
+run-name: ${{ github.actor }} is learning GitHub Actions # name of individual runs of the workflow
+
+on: 
+  - push
+
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
