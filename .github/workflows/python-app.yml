@@ -19,4 +19,4 @@ jobs:
     
     - name: Run python file
       run: |
-        python3 hello.py "username"
+        python3 hello.py "World"
