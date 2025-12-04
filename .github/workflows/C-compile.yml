@@ -8,10 +8,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/upload-artifact@v4
-        with:
-          name: hello.exe
-          path: hello.exe
       
       - name: Install gcc
         run: "sudo apt-get install -y gcc"
@@ -27,3 +23,7 @@ jobs:
             echo "Test Failed"
             exit 1
           fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hello.exe
+          path: hello.exe
