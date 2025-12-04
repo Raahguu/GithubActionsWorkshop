@@ -17,11 +17,11 @@ jobs:
         run: "sudo apt-get install -y ${{ matrix.compiler }}"
         
       - name: Compile code
-        run: "${{ matrix.compiler }} hello.c -o ${{ artifact-name }}"
+        run: "${{ matrix.compiler }} hello.c -o ${{ matrix.artifact-name }}"
 
       - name: Run tests
         run: |
-          if ./${{ artifact-name }}; then
+          if ./${{ matrix.artifact-name }}; then
             echo "Test Passed"
           else
             echo "Test Failed"
@@ -29,5 +29,5 @@ jobs:
           fi
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ artifact-name }}
-          path: ${{ artifact-name }}
+          name: ${{ matrix.artifact-name }}
+          path: ${{ matrix.artifact-name }}
