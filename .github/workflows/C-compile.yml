@@ -7,7 +7,6 @@ jobs:
     strategy:
       matrix:
         compiler: [gcc, clang]
-        artifact-name: [gcc_hello.exe, clang_hello.exe]
     runs-on: ubuntu-latest
 
     steps:
@@ -17,11 +16,11 @@ jobs:
         run: "sudo apt-get install -y ${{ matrix.compiler }}"
         
       - name: Compile code
-        run: "${{ matrix.compiler }} hello.c -o ${{ matrix.artifact-name }}"
+        run: "${{ matrix.compiler }} hello.c -o ${{ matrix.compiler }}_hello.exe"
 
       - name: Run tests
         run: |
-          if ./${{ matrix.artifact-name }}; then
+          if ./${{ matrix.compiler }}_hello.exe; then
             echo "Test Passed"
           else
             echo "Test Failed"
@@ -29,5 +28,5 @@ jobs:
           fi
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.artifact-name }}
-          path: ${{ matrix.artifact-name }}
+          name: ${{ matrix.compiler }}_hello.exe
+          path: ${{ matrix.compiler }}_hello.exe
