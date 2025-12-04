@@ -4,20 +4,24 @@ on: workflow_dispatch
 
 jobs:
   build:
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+        artifact-name: [gcc_hello.exe, clang_hello.exe]
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
       
-      - name: Install gcc
-        run: "sudo apt-get install -y gcc"
+      - name: Install ${{ matrix.compiler }}
+        run: "sudo apt-get install -y ${{ matrix.compiler }}"
         
       - name: Compile code
-        run: "gcc hello.c -o hello.exe"
+        run: "${{ matrix.compiler }} hello.c -o ${{ artifact-name }}"
 
       - name: Run tests
         run: |
-          if ./hello.exe; then
+          if ./${{ artifact-name }}; then
             echo "Test Passed"
           else
             echo "Test Failed"
@@ -25,5 +29,5 @@ jobs:
           fi
       - uses: actions/upload-artifact@v4
         with:
-          name: hello.exe
-          path: hello.exe
+          name: ${{ artifact-name }}
+          path: ${{ artifact-name }}
