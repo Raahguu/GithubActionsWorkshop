@@ -13,7 +13,7 @@ jobs:
         run: "sudo apt-get install -y gcc"
         
       - name: Compile code
-        run: "gcc hello.c -o hello.exe
+        run: "gcc hello.c -o hello.exe"
 
       - name: Run tests
         run: |
